@@ -1,0 +1,32 @@
+
+<div class="main-wrapper">
+    <div class="search-wrapper">
+        <form class="search-form" [formGroup]="searchForm">
+            <mat-form-field class="search-field" subscriptSizing="dynamic">
+                <mat-label>Pokemon Search</mat-label>
+                <input matInput placeholder="Pikachu" (keydown.enter)="getPokemonDetails()" (input)="suggestPokemon()" formControlName="pokemonSpecies">
+                <mat-error>{{error}}</mat-error>
+            </mat-form-field>
+        </form>
+        <div class="dropdownList">
+            <div class="dropdown-content">
+                <div *ngFor="let pokemon of dropdownSuggestions" (click)="dropdownClick(pokemon.name)" (keydown.enter)="dropdownClick(pokemon.name)" class="search-result" tabindex="0">
+                    <p class="result-pokedex-number">#{{pokemon.pokedexNumber}}</p>
+                    <p class="result-name">{{pokemon.name | titlecase}}</p>
+                </div>
+                <p *ngIf="noResults" class="no-results">No results</p>             
+            </div>
+        </div>
+    </div>
+
+    <div class="button-wrapper">
+        <button mat-stroked-button class="primary-button get-button" (click)="getPokemonDetails()">
+            Search
+            <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+        </button>
+        <button mat-stroked-button class="primary-button reset-button" (click)="getRandomPokemon()">
+            Random
+            <fa-icon [icon]="faDice"></fa-icon>
+        </button>   
+    </div>
+</div>

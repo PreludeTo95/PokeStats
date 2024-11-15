@@ -1,0 +1,22 @@
+<div class="main-wrapper">
+    <div class="type-wrapper card-section">
+        <p>Type: </p>
+        <div *ngFor="let type of currentPokemon.types">{{type}}</div>
+    </div>
+
+    <div class="ability-wrapper card-section">
+        <p>Abilities: </p>
+        <div *ngFor="let ability of currentPokemon.abilities">{{ability.name}}</div>
+    </div>
+
+    <div class="stat-wrapper card-section">
+        <p>Stats: </p>
+        <div *ngFor="let stat of currentPokemon.stats">{{stat.name}} : {{stat.value}}</div>
+    </div>
+
+    <button mat-stroked-button class="primary-button" (click)="toggleMoves()">Show Moves</button>
+
+    <div *ngIf="showMoves">
+        <div *ngFor="let move of currentPokemon.moves">{{move.name}}</div>
+    </div>
+</div>

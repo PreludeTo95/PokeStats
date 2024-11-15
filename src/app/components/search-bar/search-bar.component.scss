@@ -1,0 +1,109 @@
+@import '../../../styles.scss';
+
+.main-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    background-color: $light-blue;
+    border-radius: 5px;
+    border: solid $bright-yellow 2px;
+    width: 100%;
+}
+
+.search-form {
+    width: 100%;
+}
+
+.search-field {
+    width: 100%;
+}
+
+.search-wrapper {
+    width: 100%;
+    padding: 10px;
+}
+
+.get-button,
+.reset-button {
+    width: 150px;
+    height: 100% !important;
+    gap: 10px;
+    border-radius: 5px;
+    border: solid $dark-grey 2px;
+    padding: 10px;
+}
+
+.button-wrapper {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    padding-left: 0px;
+}
+
+.search-result {
+    color: $dark-grey;
+    background: linear-gradient(135deg, $white 90%, #cccccc 10%);
+    border: 2px solid $dark-grey;
+    margin-top: -1px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    height: 40px;
+
+}
+
+.search-result:hover,
+.search-result:focus {
+    cursor: pointer;
+    background: linear-gradient(135deg, #c2c2c2 90%, #7287aa 10%);
+}
+
+.result-pokedex-number {
+    margin: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: flex;
+    min-width: 8%;
+    justify-content: center;
+    background-color: $dark-yellow;
+    border-radius: 50%;
+    align-items: center;
+}
+
+.result-name {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdownList {
+    background-color: $dark-grey;
+    border-radius: 5px;
+    margin-top: 3px;
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    width: 100%;
+}
+
+.no-results {
+    height: 40px;
+    margin-top: -1px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    background: linear-gradient(135deg, $white 90%, $dark-grey 10%);
+    color: $dark-grey;
+    display: flex;
+    align-items: center;
+    border: 2px solid $dark-grey;
+    padding-left: 10px;
+    border-radius: 5px;
+    
+}

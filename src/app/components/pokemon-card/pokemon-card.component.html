@@ -1,0 +1,17 @@
+<div class="main-wrapper">
+    <div class="title">
+        <p>Name: {{currentPokemon.name | titlecase}}</p>
+        <p>Pokedex #{{currentPokemon.id}}</p>
+    </div>
+    
+    
+    <div class="sprite-wrapper">
+        <div class="sprite-image">
+            <img *ngIf="!showShiny" [src]='currentPokemon.normalSprite' />
+            <img *ngIf="showShiny" [src]='currentPokemon.shinySprite' />
+        </div>
+    </div>  
+
+    <button mat-stroked-button class="primary-button sprite-button" (click)="switchSprite()">Toggle Shiny</button>
+</div>
+
