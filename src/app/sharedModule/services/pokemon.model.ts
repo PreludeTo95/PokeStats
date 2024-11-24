@@ -12,7 +12,7 @@ export interface Pokemon {
 export interface Ability {
     name: string;
     url: string;
-    isHiddden: boolean;
+    isHidden: boolean;
     slot: number;
 }
 

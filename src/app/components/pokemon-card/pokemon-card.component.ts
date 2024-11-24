@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Pokemon } from 'src/app/services/pokemon.model';
-import { PokemonService } from 'src/app/services/pokemon.service';
-
+import { Pokemon } from 'src/app/sharedModule/services/pokemon.model';
+import { PokemonService } from 'src/app/sharedModule/services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-card',

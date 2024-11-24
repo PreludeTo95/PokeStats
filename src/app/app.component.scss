@@ -7,9 +7,6 @@
     
 }
 
-body {
-    background-color: $dark-blue;
-}
 
 .title-bar {
     background-color: $light-blue;
@@ -24,6 +21,13 @@ body {
         color: $white;
         margin-left: 20px;
     }
+}
+
+.title {
+    font-size: 48px;
+    color: $white;
+    margin: 0;
+    padding-left: 20px;
 }
 
 .search-wrapper {

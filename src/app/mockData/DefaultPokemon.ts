@@ -1,4 +1,4 @@
-import { Pokemon, statName, Type } from "../services/pokemon.model";
+import { Pokemon, statName, Type } from "../sharedModule/services/pokemon.model";
 
 export const defaultPokemon: Pokemon = {
     id: '',
@@ -6,7 +6,7 @@ export const defaultPokemon: Pokemon = {
     abilities: [{
         name: '',
         url: '',
-        isHiddden: false,
+        isHidden: false,
         slot: 1
     }],
     moves: [{
