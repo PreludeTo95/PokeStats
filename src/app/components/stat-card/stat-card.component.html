@@ -1,16 +1,27 @@
 <div class="main-wrapper">
     <div class="type-wrapper card-section">
-        <p>Type: </p>
+        <p class="section-header">Typing</p>
         <div *ngFor="let type of currentPokemon.types">{{type}}</div>
     </div>
 
     <div class="ability-wrapper card-section">
-        <p>Abilities: </p>
-        <div *ngFor="let ability of currentPokemon.abilities">{{ability.name}}</div>
+        <p class="section-header">Abilities</p>
+
+        <div class="ability-list-wrapper">
+            <div *ngFor="let ability of currentPokemon.abilities" class="regularAbilites">
+                <span *ngIf="ability.isHidden != true" class="chip abilityChip">{{ability.name | removeHyphen | titlecase }}</span>
+            </div>  
+        </div> 
+
+        <div class="ability-list-wrapper">
+            <div *ngFor="let ability of currentPokemon.abilities" class="hiddenAbilites">
+                <span *ngIf="ability.isHidden == true" class="chip abilityChip">{{ability.name | removeHyphen | titlecase }}</span>
+            </div>
+        </div> 
     </div>
 
     <div class="stat-wrapper card-section">
-        <p>Stats: </p>
+        <p class="section-header">Stats</p>
         <div *ngFor="let stat of currentPokemon.stats">{{stat.name}} : {{stat.value}}</div>
     </div>
 

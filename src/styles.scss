@@ -35,11 +35,13 @@ $PokeStats-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 $dark-blue: #152B62;
+$dark-blue-2: #203466;
 $light-blue: #3560AC;
 $white: #E2E2E2;
 $dark-grey: #434343;
 $bright-yellow: #FFCC01;
-$dark-yellow: #C8A10240;
+$blue-grey: #5A7082;
+$dark-blue-grey: #485b69;
 
 $normal-ability: #C0C0C0;
 $hidden-ability: #FFD700;
@@ -51,9 +53,14 @@ html, body {
 
 body { 
   margin: 0; 
-  font-family: Roboto, 
-  "Helvetica Neue", sans-serif; 
-  background-color: $dark-blue;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(
+    135deg, 
+    $dark-blue 35%, $dark-blue-2 35%, 
+    $dark-blue-2 40%, $dark-blue 40%, 
+    $dark-blue 45%, $dark-blue-2 45%, 
+    $dark-blue-2 70%, $dark-blue 70%
+  );
 }
 
 .primary-button {
@@ -67,3 +74,19 @@ body {
 
 }
 
+.section-header {
+  color: $white;
+  font-size: 24px;
+  margin: 0;
+}
+
+.chip {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: black;
+  
+  height: 30px;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}

@@ -15,7 +15,7 @@ export class PokemonService {
     abilities: [{
         name: '',
         url: '',
-        isHiddden: false,
+        isHidden: false,
         slot: 1
     }],
     moves: [{
@@ -75,11 +75,11 @@ export class PokemonService {
         this.currentPokemon.name = response.name;
 
         this.currentPokemon.abilities.length = 0;
-        let tempAbility: Ability = {name:'', url:'', isHiddden:false, slot:1};
+        let tempAbility: Ability = {name:'', url:'', isHidden:false, slot:1};
         response.abilities.forEach((element: { ability: { name: string; url: string; }; is_hidden: boolean; slot: number; }) => {
           tempAbility.name = element.ability.name
           tempAbility.url = element.ability.url,
-          tempAbility.isHiddden = element.is_hidden,
+          tempAbility.isHidden = element.is_hidden,
           tempAbility.slot = element.slot
 
           this.currentPokemon.abilities.push({...tempAbility});
