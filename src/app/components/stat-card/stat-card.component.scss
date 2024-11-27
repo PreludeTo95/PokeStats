@@ -15,18 +15,31 @@
     border-width: 2px;
 }
 
+.section-header {
+    display: flex;
+    justify-content: center;
+}
+
 .ability-list-wrapper {
     display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
 }
 
 .abilityChip {
-    padding: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .hiddenAbilites {
-    background-color: $hidden-ability;
+    span {
+        background-color: $hidden-ability;
+    } 
 }
 
 .regularAbilites {
-    background-color: $normal-ability;
+    span {
+        background-color: $normal-ability;
+    } 
 }
