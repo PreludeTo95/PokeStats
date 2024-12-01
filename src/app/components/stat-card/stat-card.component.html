@@ -7,17 +7,20 @@
     <div class="ability-wrapper card-section">
         <p class="section-header">Abilities</p>
 
-        <div class="ability-list-wrapper">
-            <div *ngFor="let ability of currentPokemon.abilities" class="regularAbilites">
-                <span *ngIf="ability.isHidden != true" class="chip abilityChip">{{ability.name | removeHyphen | titlecase }}</span>
-            </div>  
-        </div> 
+        <div *ngIf="currentPokemon != null">
+            <div class="ability-list-wrapper">
+                <div *ngFor="let ability of currentPokemon.abilities" class="regularAbilites">
+                    <span *ngIf="ability.isHidden != true" class="chip abilityChip">{{ability.name | removeHyphen | titlecase }}</span>
+                </div>  
+            </div> 
+    
+            <div class="ability-list-wrapper">
+                <div *ngFor="let ability of currentPokemon.abilities" class="hiddenAbilites">
+                    <span *ngIf="ability.isHidden == true" class="chip abilityChip">{{ability.name | removeHyphen | titlecase }}</span>
+                </div>
+            </div> 
+        </div>
 
-        <div class="ability-list-wrapper">
-            <div *ngFor="let ability of currentPokemon.abilities" class="hiddenAbilites">
-                <span *ngIf="ability.isHidden == true" class="chip abilityChip">{{ability.name | removeHyphen | titlecase }}</span>
-            </div>
-        </div> 
     </div>
 
     <div class="stat-wrapper card-section">
