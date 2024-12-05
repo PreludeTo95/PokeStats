@@ -4,10 +4,10 @@ import { RemoveHyphenPipe } from './pipes/remove-hyphen.pipe';
 
 @NgModule({
   declarations: [
-    RemoveHyphenPipe
+    RemoveHyphenPipe,
 ],
   exports: [
-    RemoveHyphenPipe
+    RemoveHyphenPipe,
 ],  
   imports: [
     CommonModule

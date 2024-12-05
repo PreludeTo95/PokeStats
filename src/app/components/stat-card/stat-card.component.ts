@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Pokemon } from 'src/app/sharedModule/services/pokemon.model';
 import { PokemonService } from 'src/app/sharedModule/services/pokemon.service';
+import { typeColors } from 'src/app/sharedModule/utils/type-colors';
 
 @Component({
   selector: 'app-stat-card',
@@ -23,5 +24,9 @@ export class StatCardComponent {
   
   toggleMoves() {
     this.showMoves = !this.showMoves;
+  }
+
+  getTypeColor(pokemonType: string) {
+    return typeColors[pokemonType.toLowerCase()] || '#FFFFFF';
   }
 }

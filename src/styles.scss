@@ -34,6 +34,8 @@ $PokeStats-theme: mat.define-light-theme((
 @include mat.all-component-themes($PokeStats-theme);
 
 /* You can add global styles to this file, and also import other style files */
+
+//color palette
 $dark-blue: #152B62;
 $dark-blue-2: #203466;
 $light-blue: #3560AC;
@@ -42,9 +44,32 @@ $dark-grey: #434343;
 $bright-yellow: #FFCC01;
 $blue-grey: #5A7082;
 $dark-blue-grey: #485b69;
+$black: #292929;
 
+//typing
+$normal-type: #AAAA99;
+$fire-type: #FF4422;
+$water-type: #3399FF;
+$electric-type: #FFCC33;
+$grass-type: #77CC55;
+$ice-type: #66CCFF;
+$fighting-type: #BA5443;
+$poison-type: #AA5599;
+$ground-type: #DDBB55;
+$flying-type: #8899FF;
+$psychic-type: #FF5599;
+$bug-type: #AABB22;
+$rock-type: #BBAA66;
+$ghost-type: #6666BB;
+$dragon-type: #7766EE;
+$dark-type: #775544;
+$steel-type: #AAAABB;
+$fairy-type: #EE99EE;
+
+//abilities
 $normal-ability: #C0C0C0;
-$hidden-ability: #FFD700;
+$hidden-ability: #ffdc20;
+
 
 
 html, body { 
@@ -76,17 +101,19 @@ body {
 
 .section-header {
   color: $white;
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
 }
 
 .chip {
-  outline-width: 2px;
-  outline-style: solid;
-  outline-color: black;
-  
-  height: 30px;
-  border-radius: 15px;
-  padding-left: 10px;
-  padding-right: 10px;
+  color: $black;
+  font-size: 20px;
+  font-weight: 400;
+
+  border-radius: 9999px;
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }

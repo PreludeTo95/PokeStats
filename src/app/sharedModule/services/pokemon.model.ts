@@ -11,7 +11,8 @@ export interface Pokemon {
 
 export interface Ability {
     name: string;
-    url: string;
+    pokeApiUrl: string;
+    smogonUrl: String;
     isHidden: boolean;
     slot: number;
 }

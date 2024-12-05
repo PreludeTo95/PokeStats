@@ -10,11 +10,12 @@ import { Ability, Move, Pokemon, Stat, statName, Type } from './pokemon.model';
 export class PokemonService {
 
   defaultPokemon: Pokemon = {
-    id: '',
+    id: '-1',
     name: '',
     abilities: [{
         name: '',
-        url: '',
+        pokeApiUrl: '',
+        smogonUrl: '',
         isHidden: false,
         slot: 1
     }],
@@ -50,6 +51,7 @@ export class PokemonService {
   }
 
   currentPokemon: Pokemon = {...this.defaultPokemon};
+  smogonBaseUrl = 'https://www.smogon.com/dex/sv/abilities/';
 
   constructor(
     private httpClient: HttpClient
@@ -75,12 +77,14 @@ export class PokemonService {
         this.currentPokemon.name = response.name;
 
         this.currentPokemon.abilities.length = 0;
-        let tempAbility: Ability = {name:'', url:'', isHidden:false, slot:1};
+        let tempAbility: Ability = {name:'', pokeApiUrl:'', smogonUrl:'', isHidden:false, slot:1};
         response.abilities.forEach((element: { ability: { name: string; url: string; }; is_hidden: boolean; slot: number; }) => {
-          tempAbility.name = element.ability.name
-          tempAbility.url = element.ability.url,
-          tempAbility.isHidden = element.is_hidden,
-          tempAbility.slot = element.slot
+          
+          tempAbility.name = element.ability.name;
+          tempAbility.pokeApiUrl = element.ability.url;
+          tempAbility.smogonUrl = this.smogonBaseUrl + element.ability.name;
+          tempAbility.isHidden = element.is_hidden;
+          tempAbility.slot = element.slot;
 
           this.currentPokemon.abilities.push({...tempAbility});
         });
