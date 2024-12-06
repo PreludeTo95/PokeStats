@@ -19,6 +19,17 @@
     width: 100%;
 }
 
+/* Make the input field rounded */
+.mat-form-field .mat-input-element {
+    border-radius: 20px;  /* Adjust this value for different roundness */
+  }
+  
+  /* Optional: Make the whole mat-form-field have rounded corners */
+  .mat-form-field {
+    border-radius: 20px;  /* Adjust this value as needed */
+  }
+  
+
 .search-wrapper {
     width: 100%;
     padding: 10px;
@@ -44,16 +55,20 @@
 .search-result {
     color: $dark-grey;
     background: linear-gradient(135deg, $white 90%, #cccccc 10%);
-    border: 2px solid $dark-grey;
+
+    border-color: $dark-grey;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+
     margin-top: -1px;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
+
     display: flex;
     flex-direction: row;
-    border-radius: 5px;
     height: 40px;
-
 }
 
 .search-result:hover,
@@ -89,6 +104,7 @@
 
 .dropdown-content {
     position: absolute;
+    z-index: 999;
     width: 100%;
 }
 
