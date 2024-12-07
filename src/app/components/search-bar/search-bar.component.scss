@@ -123,3 +123,14 @@
     border-radius: 5px;
     
 }
+
+.button-label {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+i {
+    font-size: 1.3em;
+}

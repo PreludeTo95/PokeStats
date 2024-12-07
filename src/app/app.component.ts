@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { faChartColumn } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,6 @@ import { faChartColumn } from '@fortawesome/free-solid-svg-icons';
 })
 
 export class AppComponent {
-  faChartColumn = faChartColumn;
   
   title = 'PokeStats';
 

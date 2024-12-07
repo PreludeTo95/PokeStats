@@ -3,16 +3,14 @@
 .main-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-
-.card-section {
-    background-color: $blue-grey;
+    gap: 10px;
+    background-color: $light-blue;
     padding: 20px;
+
     border-radius: 5px;
     border-style: solid;
-    border-color: $bright-yellow;
     border-width: 2px;
+    border-color: $bright-yellow;  
 }
 
 .section-header {
@@ -88,75 +86,3 @@
         filter: drop-shadow(2px 2px 2px rgba(36, 36, 36, 0.7));
     }
  }
-
-.normal-type {
-    background-color: $normal-type;
-}
-
-.fire-type {
-    background-color: $fire-type;
-}
-
-.water-type {
-    background-color: $water-type;
-}
-
-.electric-type {
-    background-color: $electric-type;
-}
-
-.grass-type {
-    background-color: $grass-type;
-}
-
-.ice-type {
-    background-color: $ice-type;
-}
-
-.fighting-type {
-    background-color: $ice-type;
-}
-
-.poison-type {
-    background-color: $poison-type;
-}
-
-.ground-type {
-    background-color: $ground-type;
-}
-
-.flying-type {
-    background-color: $flying-type;
-}
-
-.psychic-type {
-    background-color: $psychic-type;
-}
-
-.bug-type {
-    background-color: $bug-type;
-}
-
-.rock-type {
-    background-color: $rock-type;
-}
-
-.ghost-type {
-    background-color: $ghost-type;
-}
-
-.dragon-type {
-    background-color: $dragon-type;
-}
-
-.dark-type {
-    background-color: $dark-type;
-}
-
-.steel-type {
-    background-color: $steel-type;
-}
-
-.fairy-type {
-    background-color: $fairy-type;
-}

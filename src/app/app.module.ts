@@ -9,7 +9,6 @@ import { StatCardComponent } from './components/stat-card/stat-card.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from './sharedModule/shared.module';
@@ -28,7 +27,6 @@ import { SharedModule } from './sharedModule/shared.module';
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    FontAwesomeModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,

@@ -1,11 +1,15 @@
 <div class="main-wrapper">
-    <div class="title">
+    <div class="title card-section">
         <p class="section-header pokemonNumber">No.{{currentPokemon.id}}</p>
         <p class="section-header pokemonName">{{currentPokemon.name | removeHyphen | titlecase }}</p>
     </div>
     
     
-    <div class="sprite-wrapper">
+    <div class="sprite-wrapper card-section">
+        <div *ngIf="showShiny" class="shiny-icon">
+            <i class="ri-sparkling-2-fill"></i>
+        </div>
+
         <div class="sprite-image">
             <img *ngIf="!showShiny" [src]='currentPokemon.normalSprite' />
             <img *ngIf="showShiny" [src]='currentPokemon.shinySprite' />

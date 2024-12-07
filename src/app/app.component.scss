@@ -23,11 +23,15 @@
     }
 }
 
+.ri-bar-chart-2-fill {
+    color: $white;
+}
+
 .title {
     font-size: 48px;
     color: $white;
     margin: 0;
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .search-wrapper {
@@ -42,14 +46,8 @@
 
 .pokemon-wrapper, 
 .stat-wrapper {
-    background-color: $light-blue;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: $bright-yellow;
     width: 100%;
     height: 100%;
-    padding: 20px;
 }
 
 app-search-bar {

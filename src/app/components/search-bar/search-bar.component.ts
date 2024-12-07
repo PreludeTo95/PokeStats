@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { PokemonService } from 'src/app/sharedModule/services/pokemon.service';
-import { faMagnifyingGlass, faDice } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,8 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class SearchBarComponent {
-  faMagnifyingGlass = faMagnifyingGlass;
-  faDice = faDice;
   
   error: string = '';
   totalNumberOfPokemon: number = 1025;

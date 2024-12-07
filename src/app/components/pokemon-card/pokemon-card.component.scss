@@ -1,12 +1,36 @@
 @import '../../../styles.scss';
 
-.title,
-.sprite-image {
-    background: radial-gradient(circle, rgba(90,112,130,1) 30%, #4b5d6c 100%);
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: $light-blue;
+    padding: 20px;
+
     border-radius: 5px;
     border-style: solid;
     border-width: 2px;
-    border-color: $bright-yellow;
+    border-color: $bright-yellow;  
+}
+
+.sprite-wrapper {
+    position: relative;
+}
+
+.shiny-icon {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: $white;
+    font-size: 2.0em;
+
+    height: 45px;
+    width: 45px;
+    background-color: rgba(40, 40, 40, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
 }
 
 .pokemonNumber {
@@ -19,11 +43,6 @@
     justify-content: center;
     padding-top: 10px;
     padding-bottom: 10px;
-}
-
-.sprite-wrapper {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .sprite-button {

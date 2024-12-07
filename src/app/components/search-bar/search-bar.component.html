@@ -21,12 +21,16 @@
 
     <div class="button-wrapper">
         <button mat-stroked-button class="primary-button get-button" (click)="getPokemonDetails()">
-            Search
-            <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+            <div class="button-label">
+                <span>Search</span>
+                <i class="ri-search-line"></i>
+            </div>
         </button>
         <button mat-stroked-button class="primary-button reset-button" (click)="getRandomPokemon()">
-            Random
-            <fa-icon [icon]="faDice"></fa-icon>
+            <div class="button-label">
+                <span>Random</span>
+                <i class="ri-dice-5-line"></i>
+            </div>
         </button>   
     </div>
 </div>
