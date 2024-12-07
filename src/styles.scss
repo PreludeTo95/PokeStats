@@ -67,8 +67,8 @@ $steel-type: #AAAABB;
 $fairy-type: #EE99EE;
 
 //abilities
-$normal-ability: #C0C0C0;
-$hidden-ability: #ffdc20;
+$normal-ability: #C4C4C4;
+$hidden-ability: #ffcb00;
 
 
 
@@ -79,13 +79,6 @@ html, body {
 body { 
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: linear-gradient(
-    135deg, 
-    $dark-blue 35%, $dark-blue-2 35%, 
-    $dark-blue-2 40%, $dark-blue 40%, 
-    $dark-blue 45%, $dark-blue-2 45%, 
-    $dark-blue-2 70%, $dark-blue 70%
-  );
 }
 
 .primary-button {

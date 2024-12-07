@@ -24,19 +24,21 @@
 }
 
 .normalAbilityChip {
-    background: linear-gradient(
-        135deg, 
-        rgba(218,218,218,1) 10%, 
-        $normal-ability 90%
-    );
+    // background: linear-gradient(
+    //     135deg, 
+    //     rgba(218,218,218,1) 10%, 
+    //     $normal-ability 90%
+    // );
+    background-color: $normal-ability;
 }
 
 .hiddenAbilityChip {
-    background: linear-gradient(
-        135deg, 
-        #ffe864 10%, 
-        $hidden-ability 80%
-    );
+    // background: linear-gradient(
+    //     135deg, 
+    //     #ffe864 10%, 
+    //     $hidden-ability 80%
+    // );
+    background-color: $hidden-ability;
 }
 
 .normalAbilityChip,
@@ -76,7 +78,7 @@
     font-size: 18px;
  }
 
- .type-chip {
+ .stat-chip {
     color: #FFFFFF;
     border-color: #00000030;
     border-style: solid;

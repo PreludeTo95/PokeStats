@@ -7,10 +7,19 @@
     
 }
 
+.main-wrapper {
+    background: linear-gradient(
+        135deg, 
+        $dark-blue 35%, $dark-blue-2 35%, 
+        $dark-blue-2 40%, $dark-blue 40%, 
+        $dark-blue 45%, $dark-blue-2 45%, 
+        $dark-blue-2 70%, $dark-blue 70%
+      );
+}
 
 .title-bar {
     background-color: $light-blue;
-    padding-left: 20px;
+    padding-left: 10px;
     font-size: 48px;
     border-bottom: solid $bright-yellow 2px;
     flex-direction: row;
@@ -32,11 +41,6 @@
     color: $white;
     margin: 0;
     padding-left: 10px;
-}
-
-.search-wrapper {
-    margin-top: 20px;
-    margin-bottom: 20px;
 }
 
 .card-wrapper {
@@ -61,8 +65,6 @@ app-search-bar {
     margin-left: auto;
     margin-right: auto;
     justify-content: flex-start;
+    padding: 20px;
+    gap: 20px;
 }
-
- fa-icon {
-    color: $white;
- }

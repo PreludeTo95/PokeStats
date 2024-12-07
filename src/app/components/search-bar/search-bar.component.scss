@@ -75,6 +75,10 @@
 .search-result:focus {
     cursor: pointer;
     background: linear-gradient(135deg, #c2c2c2 90%, #7287aa 10%);
+
+    .result-pokedex-number {
+        background-color: #7287aa;
+    }
 }
 
 .result-pokedex-number {
@@ -84,7 +88,7 @@
     display: flex;
     min-width: 8%;
     justify-content: center;
-    background-color: $blue-grey;
+    background-color: #5a708252;
     border-radius: 50%;
     align-items: center;
 }
