@@ -14,7 +14,7 @@ export class PokemonCardComponent {
   showShiny: boolean = false;
 
   constructor(
-    private pokemonService: PokemonService,
+    public pokemonService: PokemonService,
   ) { }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class PokemonCardComponent {
   }
 
   switchSprite() {
-    this.showShiny = !this.showShiny;
+    this.pokemonService.setShowShiny(!this.pokemonService.getShowShiny());
   }
 
 }

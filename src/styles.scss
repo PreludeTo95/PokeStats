@@ -74,6 +74,13 @@ $hidden-ability: #ffcb00;
 
 html, body { 
   height: 100%; 
+  background: linear-gradient(
+        135deg, 
+        $dark-blue 35%, $dark-blue-2 35%, 
+        $dark-blue-2 40%, $dark-blue 40%, 
+        $dark-blue 45%, $dark-blue-2 45%, 
+        $dark-blue-2 70%, $dark-blue 70%
+      );
 }
 
 body { 

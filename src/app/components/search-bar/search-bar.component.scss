@@ -39,11 +39,6 @@
     visibility: visible;
     opacity: 1;
 
-    .dropdown-content {
-        background-color: red;
-    }
-    
-
     transition-property: opacity;
     transition-duration: 0.2s;
     transition-timing-function: ease;
@@ -87,15 +82,19 @@
 }
 
 .result-pokedex-number {
-    margin: 10px;
-    padding-top: 2px;
-    padding-bottom: 2px;
     display: flex;
-    min-width: 8%;
     justify-content: center;
-    background-color: #5a708252;
-    border-radius: 50%;
     align-items: center;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+    min-width: 8%;
+    background-color: #5a708252;
 }
 
 .result-name {
@@ -123,18 +122,16 @@
     gap: 2px;
     padding: 2px;
     border-radius: 5px;
+    background-color: $dark-grey;
 }
 
 .no-results {
     height: 40px;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: 0;
-    background: linear-gradient(135deg, $white 90%, $dark-grey 10%);
+    margin: 0;
+    background: linear-gradient(135deg, $white 90%, #cccccc 10%);
     color: $dark-grey;
     display: flex;
     align-items: center;
-    border: 2px solid $dark-grey;
     padding-left: 10px;
     border-radius: 5px;
     

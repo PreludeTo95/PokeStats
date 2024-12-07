@@ -7,6 +7,7 @@ export interface Pokemon {
     types: string[];
     normalSprite: any;
     shinySprite: any;
+    showShiny: boolean;
 }
 
 export interface Ability {

@@ -8,7 +8,7 @@
             </mat-form-field>
         </form>
         <div class="dropdownList">
-            <div class="dropdown-content">
+            <div class="dropdown-content" *ngIf="showDropdown">
                 <div *ngFor="let pokemon of dropdownSuggestions" (click)="dropdownClick(pokemon.name)" (keydown.enter)="dropdownClick(pokemon.name)" class="search-result" tabindex="0">
                     <p class="result-pokedex-number">#{{pokemon.pokedexNumber}}</p>
                     <p class="result-name">{{pokemon.name | titlecase}}</p>

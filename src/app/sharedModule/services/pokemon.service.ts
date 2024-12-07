@@ -48,6 +48,7 @@ export class PokemonService {
     ],
     normalSprite: undefined,
     shinySprite: undefined,
+    showShiny: false,
   }
 
   currentPokemon: Pokemon = {...this.defaultPokemon};
@@ -203,6 +204,14 @@ export class PokemonService {
 
   getCurrentPokemonShinySprite(): Blob {
     return this.currentPokemon.shinySprite;
+  }
+
+  setShowShiny(bool: boolean): void {
+    this.currentPokemon.showShiny = bool;
+  }
+
+  getShowShiny(): boolean {
+    return this.currentPokemon.showShiny;
   }
 
   getDefaultPokemon(): Pokemon {

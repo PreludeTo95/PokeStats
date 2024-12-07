@@ -6,13 +6,13 @@
     
     
     <div class="sprite-wrapper card-section">
-        <div *ngIf="showShiny" class="shiny-icon">
+        <div *ngIf="pokemonService.getShowShiny()" class="shiny-icon">
             <i class="ri-sparkling-2-fill"></i>
         </div>
 
         <div class="sprite-image">
-            <img *ngIf="!showShiny" [src]='currentPokemon.normalSprite' />
-            <img *ngIf="showShiny" [src]='currentPokemon.shinySprite' />
+            <img *ngIf="!pokemonService.getShowShiny()" [src]='currentPokemon.normalSprite' />
+            <img *ngIf="pokemonService.getShowShiny()" [src]='currentPokemon.shinySprite' />
         </div>
     </div>  
 

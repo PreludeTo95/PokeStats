@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PokemonService } from 'src/app/sharedModule/services/pokemon.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 
 @Component({
   selector: 'app-search-bar',
@@ -19,7 +20,8 @@ export class SearchBarComponent {
   pokemonSpecies: string = '';
   dropdownSuggestions: {name: string, pokedexNumber: string}[] = [];
   noResults: boolean = false;
-
+  showDropdown: boolean = false;
+  
   searchForm = new FormGroup({
     pokemonSpecies: new FormControl(''),
   });
@@ -64,10 +66,12 @@ export class SearchBarComponent {
   }
   
   getPokemonDetails() {
+    this.pokemonService.setShowShiny(false);
     this.pokemonService.buildPokemon(this.pokemonSpecies);
   }
 
   getRandomPokemon() {
+    this.pokemonService.setShowShiny(false);
     this.pokemonService.buildPokemon(String(Math.floor(Math.random() * (this.totalNumberOfPokemon - 1) + 1)));
   }
 
@@ -104,6 +108,11 @@ export class SearchBarComponent {
       } else {
         this.noResults = false;
       }
+
+      this.showDropdown = true;
+      
+    } else {
+      this.showDropdown = false;
     }
   }
 
@@ -111,6 +120,7 @@ export class SearchBarComponent {
     this.pokemonSpecies = pokemonSpecies;
     this.dropdownSuggestions = [];
     this.searchForm.get('pokemonSpecies')?.setValue('');
+    this.showDropdown = false;
 
     this.getPokemonDetails();
   }
