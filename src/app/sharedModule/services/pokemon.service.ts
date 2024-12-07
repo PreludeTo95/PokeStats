@@ -112,11 +112,17 @@ export class PokemonService {
           this.currentPokemon.types.push(element.type.name);
         });
 
+        // Official Art
         this.currentPokemon.normalSprite = response.sprites?.other?.['official-artwork'].front_default;
         this.currentPokemon.shinySprite = response.sprites?.other?.['official-artwork'].front_shiny;
 
+        // Pokemon Home
         // this.currentPokemon.normalSprite = response.sprites.other.home.front_default;
         // this.currentPokemon.shinySprite = response.sprites.other.home.front_shiny;
+
+        // Pokemon Showdown
+        // this.currentPokemon.normalSprite = response.sprites?.other?.showdown.front_default;
+        // this.currentPokemon.shinySprite = response.sprites?.other?.showdown.front_shiny;
       },
       error: err => {
         console.error('Error fetching data: ', err);
