@@ -1,10 +1,9 @@
-
 <div class="main-wrapper">
     <div class="search-wrapper">
-        <form class="search-form" [formGroup]="searchForm">
+        <form class="search-form" [formGroup]="searchForm" autocomplete="off">
             <mat-form-field class="search-field" subscriptSizing="dynamic">
                 <mat-label>Pokemon Search</mat-label>
-                <input matInput placeholder="Pikachu" (keydown.enter)="getPokemonDetails()" (input)="suggestPokemon()" formControlName="pokemonSpecies">
+                <input matInput id="search-input" placeholder="Pikachu" (keydown.enter)="getPokemonDetails()" (input)="suggestPokemon()" formControlName="pokemonSpecies">
                 <mat-error>{{error}}</mat-error>
             </mat-form-field>
         </form>
