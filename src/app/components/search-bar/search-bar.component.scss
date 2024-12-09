@@ -111,7 +111,8 @@
     visibility: hidden;
     opacity: 0;
 
-    transition: opacity 0.2s ease, visibility 0s 0.3s;}
+    transition: opacity 0.2s ease, visibility 0s 0.2;
+}
 
 .dropdown-content {
     position: absolute;

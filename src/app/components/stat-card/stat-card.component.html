@@ -39,9 +39,14 @@
     
     <div class="stat-wrapper">
         <p class="section-header">Stats</p>
-        <div class="card-section type-section">
-            <div *ngFor="let stat of currentPokemon.stats">   
-                <span>{{stat.name}} : {{stat.value}}</span>
+        <div class="card-section stat-section">
+            <div class="individual-stat" *ngFor="let stat of currentPokemon.stats">   
+                <span class="stat-name">{{stat.name}}</span>
+                <div class="stat-bar-wrapper">
+                    <div class="stat-bar" [ngStyle]="{ 'width': calculateStatBarLength(stat.value) }"></div>
+                    <span>{{stat.value}}</span>
+                </div>
+
             </div>
         </div>
     </div>

@@ -87,4 +87,34 @@
     span {
         filter: drop-shadow(2px 2px 2px rgba(36, 36, 36, 0.7));
     }
+
  }
+
+ .stat-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+ }
+
+ .stat-name {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+ }
+
+ .individual-stat {
+    display: flex;
+    flex-direction: row;
+ }
+
+ .stat-bar-wrapper {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+ }
+
+ .stat-bar {
+    background-color: black;
+    height: 20px;
+}

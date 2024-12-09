@@ -13,6 +13,7 @@ export class StatCardComponent {
   
   currentPokemon!: Pokemon;
   showMoves: boolean = false;
+  maxChartValue: number = 285;
 
   constructor(
     private pokemonService: PokemonService,
@@ -28,5 +29,9 @@ export class StatCardComponent {
 
   getTypeColor(pokemonType: string) {
     return typeColors[pokemonType.toLowerCase()] || '#FFFFFF';
+  }
+
+  calculateStatBarLength(statValue: number) {
+    return ((100 * statValue / this.maxChartValue).toString() + '%');
   }
 }
