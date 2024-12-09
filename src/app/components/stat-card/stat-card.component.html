@@ -12,26 +12,30 @@
     <div class="ability-wrapper">
         <span class="section-header">Abilities</span>
         <div class="card-section ability-section">
-            <div *ngIf="currentPokemon.id != '-1'" class="ability-list-wrapper">
+            <div class="ability-list-wrapper">
 
-                <div class="normal-abilities">
+                <div class="ability-titles">
                     <span class="ability-column-header">Normal</span>
-                    <ng-container *ngFor="let ability of currentPokemon.abilities" class="normalAbilites">
-                        <a *ngIf="ability.isHidden != true" [href]="ability.smogonUrl" target="_blank" class="chip stat-chip normalAbilityChip">
-                            <span>{{ability.name | removeHyphen | titlecase}}</span>
-                        </a>
-                    </ng-container>  
-                </div> 
-        
-                <div class="hidden-abilities">
                     <span class="ability-column-header">Hidden</span>
-                    <ng-container *ngFor="let ability of currentPokemon.abilities" class="hiddenAbilites">
-                        <a *ngIf="ability.isHidden == true" [href]="ability.smogonUrl" target="_blank" class="chip stat-chip hiddenAbilityChip">
-                            <span>{{ability.name | removeHyphen | titlecase}}</span>
-                        </a>
-                    </ng-container>
-                </div> 
+                </div>
 
+                <div class="ability-lists">
+                    <div class="normal-abilities">
+                        <ng-container *ngFor="let ability of currentPokemon.abilities" class="normalAbilites">
+                            <a *ngIf="ability.isHidden != true" [href]="ability.smogonUrl" target="_blank" class="chip stat-chip normalAbilityChip">
+                                <span>{{ability.name | removeHyphen | titlecase}}</span>
+                            </a>
+                        </ng-container>  
+                    </div> 
+            
+                    <div class="hidden-abilities">
+                        <ng-container *ngFor="let ability of currentPokemon.abilities" class="hiddenAbilites">
+                            <a *ngIf="ability.isHidden == true" [href]="ability.smogonUrl" target="_blank" class="chip stat-chip hiddenAbilityChip">
+                                <span>{{ability.name | removeHyphen | titlecase}}</span>
+                            </a>
+                        </ng-container>
+                    </div> 
+                </div>
             </div>
     
         </div>
@@ -51,7 +55,9 @@
         </div>
     </div>
 
-    <button mat-stroked-button class="primary-button" (click)="toggleMoves()">Show Moves</button>
+    <div class="button-wrapper">
+        <button mat-stroked-button class="primary-button move-button" (click)="toggleMoves()">Show Moves</button>
+    </div>
 
     <div *ngIf="showMoves">
         <div *ngFor="let move of currentPokemon.moves">{{move.name}}</div>

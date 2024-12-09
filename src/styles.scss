@@ -70,12 +70,14 @@ $fairy-type: #EE99EE;
 $normal-ability: #C4C4C4;
 $hidden-ability: #ffcb00;
 
-
+html {
+  font-size: 20px;
+}
 
 html, body { 
   height: 100%; 
   background: linear-gradient(
-        135deg, 
+        125deg, 
         $dark-blue 35%, $dark-blue-2 35%, 
         $dark-blue-2 40%, $dark-blue 40%, 
         $dark-blue 45%, $dark-blue-2 45%, 
@@ -96,7 +98,6 @@ body {
   border-width: 2px;
   border-color: $dark-grey !important;
   font-size: 20px;
-
 }
 
 .section-header {
@@ -125,4 +126,5 @@ body {
   border-style: solid;
   border-color: $bright-yellow;
   border-width: 2px;
+  min-height: fit-content;
 }

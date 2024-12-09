@@ -2,9 +2,14 @@
 
 * {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     
+}
+
+.main-wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .title-bar {
@@ -36,6 +41,7 @@
 .card-wrapper {
     flex-direction: row;
     gap: 20px;
+    height: 100%;
 }
 
 .pokemon-wrapper, 
@@ -46,12 +52,15 @@
 
 app-search-bar {
     align-items: center;
-    width: 100%;
+}
+
+app-pokemon-card,
+app-stat-card {
+    height: 100%;
 }
 
 .components {
     width: 1220px;
-    height: auto;
     margin-left: auto;
     margin-right: auto;
     justify-content: flex-start;

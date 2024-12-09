@@ -3,6 +3,8 @@
 .main-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     gap: 10px;
     background-color: $light-blue;
     padding: 20px;
@@ -16,11 +18,25 @@
 .section-header {
     display: flex;
     padding-left: 10px;
+    padding-bottom: 5px;
 }
 
 .ability-list-wrapper {
     display: flex;
     gap: 10%;
+    width: 100%;
+    flex-direction: column;
+}
+
+.ability-titles {
+    display: flex;
+    justify-content: space-around;
+}
+
+.ability-lists {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
 }
 
 .normalAbilityChip {
@@ -58,11 +74,13 @@
     align-items: center;
     gap: 10px;
     width: 50%;
+    justify-content: space-evenly;
 }
 
  .ability-section {
-    background: linear-gradient(135deg, $dark-blue-grey 50%, $blue-grey 50%);
-    min-height: 12vh;
+    background: linear-gradient(125deg, $dark-blue-grey 52%, $blue-grey 52%);
+    min-height: 13vh;
+    display: flex;
  }
 
  .type-section {
@@ -75,7 +93,7 @@
 
  .ability-column-header {
     color: $white;
-    font-size: 18px;
+    font-size: 1rem;
  }
 
  .stat-chip {
@@ -93,11 +111,14 @@
  .stat-section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
+    height: 22vh;
+    margin-bottom: 10px;
  }
 
  .stat-name {
-    width: 25%;
+    width: 30%;
     display: flex;
     justify-content: center;
  }
@@ -117,4 +138,8 @@
  .stat-bar {
     background-color: black;
     height: 20px;
+}
+
+.move-button {
+    width: 100%;
 }

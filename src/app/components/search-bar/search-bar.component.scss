@@ -63,7 +63,7 @@
 
 .search-result {
     color: $dark-grey;
-    background: linear-gradient(135deg, $white 90%, #cccccc 10%);
+    background: linear-gradient(125deg, $white 90%, #cccccc 10%);
     box-sizing: border-box;
     border-radius: 5px;
     display: flex;
@@ -74,7 +74,7 @@
 .search-result:hover,
 .search-result:focus {
     cursor: pointer;
-    background: linear-gradient(135deg, #c2c2c2 90%, #7287aa 10%);
+    background: linear-gradient(125deg, #c2c2c2 90%, #7287aa 10%);
 
     .result-pokedex-number {
         background-color: #7287aa;
@@ -129,7 +129,7 @@
 .no-results {
     height: 40px;
     margin: 0;
-    background: linear-gradient(135deg, $white 90%, #cccccc 10%);
+    background: linear-gradient(125deg, $white 90%, #cccccc 10%);
     color: $dark-grey;
     display: flex;
     align-items: center;
