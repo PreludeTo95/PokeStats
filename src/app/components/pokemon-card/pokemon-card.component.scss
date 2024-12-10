@@ -22,6 +22,8 @@
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(90,112,130,1) 30%, #4b5d6c 100%);
 }
 
 .shiny-icon {
@@ -29,7 +31,7 @@
     right: 20px;
     top: 20px;
     color: $white;
-    font-size: 2.0em;
+    font-size: 1.7em;
 
     height: 45px;
     width: 45px;
