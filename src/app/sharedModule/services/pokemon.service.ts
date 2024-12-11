@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Ability, Move, Pokemon, Stat, statName, Type } from './pokemon.model';
 
 @Injectable({
@@ -17,7 +17,8 @@ export class PokemonService {
         pokeApiUrl: '',
         smogonUrl: '',
         isHidden: false,
-        slot: 1
+        slot: 1,
+        description: 'ability description'
     }],
     moves: [{
         name: '',
@@ -78,14 +79,21 @@ export class PokemonService {
         this.currentPokemon.name = response.name;
 
         this.currentPokemon.abilities.length = 0;
-        let tempAbility: Ability = {name:'', pokeApiUrl:'', smogonUrl:'', isHidden:false, slot:1};
-        response.abilities.forEach((element: { ability: { name: string; url: string; }; is_hidden: boolean; slot: number; }) => {
+        let tempAbility: Ability = {name:'', pokeApiUrl:'', smogonUrl:'', isHidden:false, slot:1, description:'ability description'};
+        response.abilities.forEach((element: { ability: { name: string; url: string; }; is_hidden: boolean; slot: number; desciption: string}) => {
           
           tempAbility.name = element.ability.name;
           tempAbility.pokeApiUrl = element.ability.url;
           tempAbility.smogonUrl = this.smogonBaseUrl + element.ability.name;
           tempAbility.isHidden = element.is_hidden;
           tempAbility.slot = element.slot;
+          
+          this.getAbilityDescription(element.ability.name).pipe(
+            map(abilityDescriptionResponse => {
+              tempAbility.description = abilityDescriptionResponse.flavor_text_entries[abilityDescriptionResponse.flavor_text_entries.length - 1].flavor_text;
+              return tempAbility;
+            })
+          )
 
           this.currentPokemon.abilities.push({...tempAbility});
         });
@@ -132,6 +140,15 @@ export class PokemonService {
         console.log("Data retrieved successfully");
       }
     });
+  }
+
+  getAbilityDescription(abilityName: string) {
+    let baseUrl = "https://pokeapi.co/api/v2/ability/";
+    let finalUrl = baseUrl + abilityName;
+
+    let response: Observable<any> = this.httpClient.get<any>(finalUrl);
+
+    return response;
   }
 
   setCurrentPokemon(pokemon: Pokemon): void {

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from './sharedModule/shared.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SharedModule } from './sharedModule/shared.module';
     MatInputModule,
     ReactiveFormsModule,
     SharedModule,
+    MatTooltipModule
   ],
   providers: [
 

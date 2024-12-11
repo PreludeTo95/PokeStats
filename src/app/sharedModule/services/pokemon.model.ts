@@ -16,6 +16,7 @@ export interface Ability {
     smogonUrl: String;
     isHidden: boolean;
     slot: number;
+    description: string;
 }
 
 export interface Move {

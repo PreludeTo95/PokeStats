@@ -22,7 +22,9 @@
                 <div class="ability-lists">
                     <div class="normal-abilities">
                         <ng-container *ngFor="let ability of currentPokemon.abilities" class="normalAbilites">
-                            <a *ngIf="ability.isHidden != true" [href]="ability.smogonUrl" target="_blank" class="chip stat-chip normalAbilityChip">
+                            <a *ngIf="ability.isHidden != true" 
+                            [href]="ability.smogonUrl" target="_blank" class="chip stat-chip normalAbilityChip" 
+                            [matTooltip]="ability.description" [matTooltipPosition]="'above'">
                                 <span>{{ability.name | removeHyphen | titlecase}}</span>
                             </a>
                         </ng-container>  
