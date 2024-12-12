@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import { Ability, Move, Pokemon, Stat, statName, Type } from './pokemon.model';
+import { Observable } from 'rxjs';
+import { Ability, Move, Pokemon, Stat } from './pokemon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +28,6 @@ export class PokemonService {
     private httpClient: HttpClient
   ) { }
 
-  ngOnInit() {
-    
-  }
-
   getPokemonDetails(pokemonSpecies: string) {
     let baseUrl = "https://pokeapi.co/api/v2/pokemon/";
     let finalUrl = baseUrl + pokemonSpecies;
@@ -42,6 +38,8 @@ export class PokemonService {
   }
 
   buildPokemon(pokemonSpecies: string) {
+    
+    
     this.getPokemonDetails(pokemonSpecies).subscribe({
       next: response => {
         this.resetPokemonProperties();
@@ -56,7 +54,7 @@ export class PokemonService {
             smogonUrl: this.smogonBaseUrl + element.ability.name,
             isHidden: element.is_hidden,
             slot: element.slot,
-            description: 'test'
+            description: this.getAbilityDescription(element.ability.name)
           }))
         );
 
@@ -104,17 +102,27 @@ export class PokemonService {
   getAbilityDescription(abilityName: string) {
     let baseUrl = "https://pokeapi.co/api/v2/ability/";
     let finalUrl = baseUrl + abilityName;
+    let abilityDescription: string;
 
-    let response: Observable<any> = this.httpClient.get<any>(finalUrl);
-
-    return response;
+    this.httpClient.get<any>(finalUrl).subscribe({
+      next: response => {
+        abilityDescription = response.flavor_text_entries[response.flavor_text_entries.length - 1].flavor_text;
+      },
+      error: err => {
+        console.error('An error occurred: ' + err);
+      },
+      complete: () => {
+        console.log(abilityDescription);
+        return abilityDescription;
+      }
+    });
   }
 
   resetPokemonProperties() {
-    this.currentPokemon.abilities.length = 0;
-    this.currentPokemon.moves.length = 0;
-    this.currentPokemon.stats.length = 0;
-    this.currentPokemon.types.length = 0;
+    this.currentPokemon.abilities = [];
+    this.currentPokemon.moves = [];
+    this.currentPokemon.stats = [];
+    this.currentPokemon.types = [];
   }
 
   setCurrentPokemon(pokemon: Pokemon): void {
