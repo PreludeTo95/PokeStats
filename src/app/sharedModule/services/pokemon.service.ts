@@ -113,11 +113,24 @@ export class PokemonService {
   
     return this.httpClient.get<any>(finalUrl).pipe(
       map(response => {
-        let effectEntry = response.effect_entries.find((entry: any) => 
-          entry.language.name === this.preferredLanguage
-        );
-        
-        return effectEntry ? effectEntry.short_effect : 'No description available';
+        let effectEntry;
+
+        for (let i = (response.flavor_text_entries.length-1); i >= 0; i--) {
+          let abilityEntry = response.flavor_text_entries[i];
+
+          if (abilityEntry.language.name === this.preferredLanguage) {
+            effectEntry = abilityEntry.flavor_text;
+            console.log("Found match: " + abilityEntry);
+            break;
+          }
+        }
+
+        if (!effectEntry) {
+          return 'No description available';
+        }
+
+        let effectSubstrings: string[] = effectEntry.trim().split(/\.(?=\s|$)/);
+        return effectSubstrings[0] ? effectSubstrings[0].trim() : 'No description available';
       }),
       catchError(err => {
         console.error('Error fetching ability description:', err);
