@@ -5,9 +5,11 @@ export const defaultPokemon: Pokemon = {
     name: '',
     abilities: [{
         name: '',
-        url: '',
+        pokeApiUrl: '',
+        smogonUrl: '',
         isHidden: false,
-        slot: 1
+        slot: 1,
+        description: ''
     }],
     moves: [{
         name: '',
@@ -38,4 +40,5 @@ export const defaultPokemon: Pokemon = {
     ],
     normalSprite: undefined,
     shinySprite: undefined,
+    showShiny: false
 }

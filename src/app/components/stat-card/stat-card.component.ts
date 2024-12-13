@@ -10,8 +10,7 @@ import { typeColors } from 'src/app/sharedModule/utils/type-colors';
 })
 
 export class StatCardComponent {
-  
-  currentPokemon!: Pokemon;
+  currentPokemon: any;
   showMoves: boolean = false;
   maxChartValue: number = 285;
   statNames: string[] = ['HP','Attack','Defense','Sp. Atk','Sp. Def','Speed'];
@@ -38,7 +37,9 @@ export class StatCardComponent {
   ) { }
 
   ngOnInit() {
-    this.currentPokemon = this.pokemonService.getCurrentPokemon();
+    this.pokemonService.currentPokemon$.subscribe(pokemon => {
+      this.currentPokemon = pokemon;
+    })
   }
   
   toggleMoves() {

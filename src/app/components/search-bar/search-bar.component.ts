@@ -32,19 +32,13 @@ export class SearchBarComponent {
   ) { }
 
   ngOnInit() {
-    let tempPokemon = {
-      name: '',
-      pokedexNumber: ''
-    };
 
     this.getListOfAllPokemon().subscribe({
-      next: value => {
-        value.results.forEach((element: { name: string; url: string; }) => {
-          tempPokemon.name = element.name;
-          tempPokemon.pokedexNumber = this.parsePokedexNumber(element.url);
-          
-          this.pokemonList.push({...tempPokemon});
-        });
+      next: response => {
+        this.pokemonList = response.results.map((element: {name: string, url: string} ) => ({
+          name: element.name,
+          pokedexNumber: this.parsePokedexNumber(element.url),
+        }))
       },
       error: err => {
         console.error('Observable emitted an error: ' + err);
@@ -66,13 +60,13 @@ export class SearchBarComponent {
   }
   
   getPokemonDetails() {
-    this.pokemonService.setShowShiny(false);
     this.pokemonService.buildPokemon(this.pokemonSpecies);
+    this.pokemonService.setShowShiny(false);
   }
 
   getRandomPokemon() {
-    this.pokemonService.setShowShiny(false);
     this.pokemonService.buildPokemon(String(Math.floor(Math.random() * (this.totalNumberOfPokemon - 1) + 1)));
+    this.pokemonService.setShowShiny(false);
   }
 
   suggestPokemon() {

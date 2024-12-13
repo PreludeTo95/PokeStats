@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, forkJoin, map, of } from 'rxjs';
 import { Ability, Move, Pokemon, Stat } from './pokemon.model';
+import { defaultPokemon } from 'src/app/mockData/DefaultPokemon';
 
 @Injectable({
   providedIn: 'root'
@@ -9,24 +10,17 @@ import { Ability, Move, Pokemon, Stat } from './pokemon.model';
 
 export class PokemonService {
 
-  defaultPokemon: Pokemon = {
-    id: '',
-    name: '',
-    abilities: [],
-    moves: [],
-    stats: [],
-    types: [],
-    normalSprite: undefined,
-    shinySprite: undefined,
-    showShiny: false,
-  }
+  private currentPokemonSubject = new BehaviorSubject<Pokemon | null>(null);
+  currentPokemon$ = this.currentPokemonSubject.asObservable();
+  preferredLanguage: string = 'en';
 
-  currentPokemon: Pokemon = {...this.defaultPokemon};
   smogonBaseUrl = 'https://www.smogon.com/dex/sv/abilities/';
 
   constructor(
-    private httpClient: HttpClient
-  ) { }
+    private httpClient: HttpClient,
+  ) {
+    this.setCurrentPokemon(defaultPokemon);
+  }
 
   getPokemonDetails(pokemonSpecies: string) {
     let baseUrl = "https://pokeapi.co/api/v2/pokemon/";
@@ -38,174 +32,246 @@ export class PokemonService {
   }
 
   buildPokemon(pokemonSpecies: string) {
-    
-    
+    let responsePokemon: Pokemon = { ...defaultPokemon };
+
     this.getPokemonDetails(pokemonSpecies).subscribe({
       next: response => {
-        this.resetPokemonProperties();
+        responsePokemon.id = response.id;
+        responsePokemon.name = response.name;
 
-        this.setCurrentPokemonId(response.id);
-        this.setCurrentPokemonName(response.name);
-        
-        this.setCurrentPokemonAbilities(
-          response.abilities.map((element: {ability: {name: string, url: string}, is_hidden: boolean, slot: number}) => ({
-            name: element.ability.name,
-            pokeApiUrl: element.ability.url,
-            smogonUrl: this.smogonBaseUrl + element.ability.name,
-            isHidden: element.is_hidden,
-            slot: element.slot,
-            description: this.getAbilityDescription(element.ability.name)
-          }))
-        );
+        let abilityObservables = response.abilities.map((element: { ability: { name: string, url: string }, is_hidden: boolean, slot: number }) => {
+          return this.getAbilityDescription(element.ability.name).pipe(
+            map((description: string) => ({
+              name: element.ability.name,
+              pokeApiUrl: element.ability.url,
+              smogonUrl: this.smogonBaseUrl + element.ability.name,
+              isHidden: element.is_hidden,
+              slot: element.slot,
+              description: description
+            }))
+          );
+        });
 
-        this.setCurrentPokemonMoves(
-          response.moves.map((element: { move: { name: string, url: string } }) => ({
-            name: element.move.name,
-            url: element.move.url
-          }))
-        );
+        forkJoin(abilityObservables).subscribe({
+          next: (abilities: any) => {
+            responsePokemon.abilities = abilities;
 
-        this.setCurrentPokemonStats(
-          response.stats.map((element: { base_stat: number, effort: number, stat: { name: string, url: string } }) => ({
-            name: element.stat.name,
-            value: element.base_stat
-          }))
-        );
+            console.log(response.moves);
+            responsePokemon.moves = response.moves.map((element: { move: { name: string, url: string } }) => ({
+              name: element.move.name,
+              url: element.move.url
+            }))
 
-        this.setCurrentPokemonTypes(
-          response.types.map((element: { slot: number; type: { name: string; url: string } }) => 
-            element.type.name
-          )
-        );
+            console.log(response.stats);
+            responsePokemon.stats = response.stats.map((element: { base_stat: number, effort: number, stat: { name: string, url: string } }) => ({
+              name: element.stat.name,
+              value: element.base_stat
+            }))
 
-        // Official Art
-        this.setCurrentPokemonNormalSprite(response.sprites?.other?.['official-artwork'].front_default);
-        this.setCurrentPokemonShinySprite(response.sprites?.other?.['official-artwork'].front_shiny);
+            console.log(response.types);
+            responsePokemon.types = response.types.map((element: { slot: number; type: { name: string; url: string } }) =>
+              element.type.name
+            )
 
-        // Pokemon Home
-        // this.setCurrentPokemonNormalSprite(response.sprites.other.home.front_default);
-        // this.setCurrentPokemonShinySprite(response.sprites.other.home.front_shiny);
 
-        // Pokemon Showdown
-        // this.setCurrentPokemonNormalSprite(response.sprites?.other?.showdown.front_default);
-        // this.setCurrentPokemonShinySprite(response.sprites?.other?.showdown.front_shiny);
+            // Official Art
+            responsePokemon.normalSprite = response.sprites?.other?.['official-artwork'].front_default;
+            responsePokemon.shinySprite = response.sprites?.other?.['official-artwork'].front_shiny;
+
+            // Pokemon Home
+            // responsePokemon.normalSprite = response.sprites.other.home.front_default;
+            // responsePokemon.shinySprite = response.sprites.other.home.front_shiny;
+
+            // Pokemon Showdown
+            // responsePokemon.normalSprite = response.sprites?.other?.showdown.front_default;
+            // responsePokemon.shinySprite = response.sprites?.other?.showdown.front_shiny;
+
+            this.setCurrentPokemon(responsePokemon);
+          },
+          error: err => {
+            console.error('An error occurred: ' + err);
+          },
+          complete: () => {
+
+          }
+        })
+
+
       },
       error: err => {
         console.error('Error fetching data: ', err);
       },
-      complete: () => {
+      complete: () => {        
         console.log("Data retrieved successfully");
       }
     });
   }
 
-  getAbilityDescription(abilityName: string) {
+  getAbilityDescription(abilityName: string): Observable<string> {
     let baseUrl = "https://pokeapi.co/api/v2/ability/";
     let finalUrl = baseUrl + abilityName;
-    let abilityDescription: string;
+  
+    return this.httpClient.get<any>(finalUrl).pipe(
+      map(response => {
+        let effectEntry = response.effect_entries.find((entry: any) => 
+          entry.language.name === this.preferredLanguage
+        );
+        
+        return effectEntry ? effectEntry.short_effect : 'No description available';
+      }),
+      catchError(err => {
+        console.error('Error fetching ability description:', err);
+        return of('Error fetching description'); 
+      })
+    );
+  }
 
-    this.httpClient.get<any>(finalUrl).subscribe({
-      next: response => {
-        abilityDescription = response.flavor_text_entries[response.flavor_text_entries.length - 1].flavor_text;
-      },
-      error: err => {
-        console.error('An error occurred: ' + err);
-      },
-      complete: () => {
-        console.log(abilityDescription);
-        return abilityDescription;
-      }
-    });
+  validateCurrentPokemon(): Pokemon {
+    let currentPokemon = this.currentPokemonSubject.getValue();
+
+    if (!currentPokemon) {
+      throw new Error("No current Pokemon available");
+    }
+
+    return currentPokemon;
   }
 
   resetPokemonProperties() {
-    this.currentPokemon.abilities = [];
-    this.currentPokemon.moves = [];
-    this.currentPokemon.stats = [];
-    this.currentPokemon.types = [];
+    let currentPokemon = this.validateCurrentPokemon();
+    let updatedPokemon: Pokemon = { ...currentPokemon }
+
+    updatedPokemon.abilities = [];
+    updatedPokemon.moves = [];
+    updatedPokemon.stats = [];
+    updatedPokemon.types = [];
+
+    this.currentPokemonSubject.next(updatedPokemon);
   }
 
   setCurrentPokemon(pokemon: Pokemon): void {
-    this.currentPokemon = pokemon;
+    this.currentPokemonSubject.next(pokemon);
   }
-  
+
   getCurrentPokemon(): Pokemon {
-    return this.currentPokemon;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon;
   }
 
   setCurrentPokemonId(id: string) {
-    this.currentPokemon.id = id;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.id = id;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonId(): string {
-    return this.currentPokemon.id;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.id;
   }
 
   setCurrentPokemonName(name: string): void {
-    this.currentPokemon.name = name;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.name = name;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonName(): string {
-    return this.currentPokemon.name;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.name;
   }
 
   setCurrentPokemonAbilities(abilities: Ability[]): void {
-    this.currentPokemon.abilities = abilities;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.abilities = abilities;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonAbilities(): Ability[] {
-    return this.currentPokemon.abilities;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.abilities;
   }
 
   setCurrentPokemonMoves(moves: Move[]): void {
-    this.currentPokemon.moves = moves;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.moves = moves;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonMoves(): Move[] {
-    return this.currentPokemon.moves;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.moves;
   }
 
   setCurrentPokemonStats(stats: Stat[]): void {
-    this.currentPokemon.stats = stats;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.stats = stats;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonStats(): Stat[] {
-    return this.currentPokemon.stats;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.stats;
   }
 
   setCurrentPokemonTypes(types: string[]): void {
-    this.currentPokemon.types = types;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.types = types;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonTypes(): string[] {
-    return this.currentPokemon.types;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.types;
   }
 
   setCurrentPokemonNormalSprite(sprite: Blob): void {
-    this.currentPokemon.normalSprite = sprite;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.normalSprite = sprite;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonNormalSprite(): Blob {
-    return this.currentPokemon.normalSprite;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.normalSprite;
   }
 
   setCurrentPokemonShinySprite(sprite: Blob): void {
-    this.currentPokemon.shinySprite = sprite;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.shinySprite = sprite;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getCurrentPokemonShinySprite(): Blob {
-    return this.currentPokemon.shinySprite;
+    let currentPokemon = this.validateCurrentPokemon();
+
+    return currentPokemon.shinySprite;
   }
 
   setShowShiny(bool: boolean): void {
-    this.currentPokemon.showShiny = bool;
+    let currentPokemon = this.validateCurrentPokemon();
+    currentPokemon.showShiny = bool;
+
+    this.currentPokemonSubject.next(currentPokemon);
   }
 
   getShowShiny(): boolean {
-    return this.currentPokemon.showShiny;
-  }
+    let currentPokemon = this.validateCurrentPokemon();
 
-  getDefaultPokemon(): Pokemon {
-    return this.defaultPokemon;
+    return currentPokemon.showShiny;
   }
 }

@@ -10,7 +10,7 @@ import { PokemonService } from 'src/app/sharedModule/services/pokemon.service';
 
 export class PokemonCardComponent {
   
-  currentPokemon!: Pokemon;
+  currentPokemon: any;
   showShiny: boolean = false;
 
   constructor(
@@ -18,7 +18,9 @@ export class PokemonCardComponent {
   ) { }
 
   ngOnInit() {
-    this.currentPokemon = this.pokemonService.getCurrentPokemon();
+    this.pokemonService.currentPokemon$.subscribe(pokemon => {
+      this.currentPokemon = pokemon;
+    })
   }
 
   switchSprite() {
