@@ -13,6 +13,7 @@ export class PokemonService {
   private currentPokemonSubject = new BehaviorSubject<Pokemon | null>(null);
   currentPokemon$ = this.currentPokemonSubject.asObservable();
   preferredLanguage: string = 'en';
+  public totalNumberOfPokemon: number = 1025;
 
   smogonBaseUrl = 'https://www.smogon.com/dex/sv/abilities/';
 
@@ -129,7 +130,7 @@ export class PokemonService {
           return 'No description available';
         }
 
-        let effectSubstrings: string[] = effectEntry.trim().split(/\.(?=\s|$)/);
+        let effectSubstrings: string[] = effectEntry.trim().split(/ \. (?! \s | \w | Sp\.) /);
         return effectSubstrings[0] ? effectSubstrings[0].trim() : 'No description available';
       }),
       catchError(err => {

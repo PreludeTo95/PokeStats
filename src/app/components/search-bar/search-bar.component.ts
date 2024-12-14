@@ -13,7 +13,7 @@ import { PokemonCardComponent } from '../pokemon-card/pokemon-card.component';
 export class SearchBarComponent {
   
   error: string = '';
-  totalNumberOfPokemon: number = 1025;
+  totalNumberOfPokemon: number;
   letPokemonList: any;
   pokemonListUrl: string = 'https://pokeapi.co/api/v2/pokemon?limit=9999'
   pokemonList: {name: string, pokedexNumber: string}[] = [];
@@ -29,7 +29,9 @@ export class SearchBarComponent {
   constructor(
     private pokemonService: PokemonService,
     private httpClient: HttpClient,
-  ) { }
+  ) { 
+    this.totalNumberOfPokemon = this.pokemonService.totalNumberOfPokemon;
+  }
 
   ngOnInit() {
 

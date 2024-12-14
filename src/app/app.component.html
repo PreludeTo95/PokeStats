@@ -5,11 +5,12 @@
     </div>
 
 
+
     <div class="components">
         <div class="search-wrapper">
             <app-search-bar></app-search-bar>
         </div>
-        
+
         <div class="card-wrapper">
             <div class="pokemon-wrapper">
                 <app-pokemon-card></app-pokemon-card>
@@ -19,5 +20,14 @@
             </div>
         </div>
     </div>
-    
+</div>
+
+<div class="pokedex-arrows">
+    <div class="left-arrow" (click)="previousPokemon()">
+        <i class="ri-arrow-left-s-fill arrow-icon"></i>
+    </div>
+    <div class="right-arrow" (click)="nextPokemon()">
+        <i class="ri-arrow-right-s-fill arrow-icon"></i>
+    </div>
+
 </div>
